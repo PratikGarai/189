@@ -28,11 +28,13 @@ int main()
 	char a[m];
 	cout<<"Enter string 1 : ";
 	cin>>a;
+	a[m] = '\0';
 	cout<<"Enter the length of string 2 : ";
 	cin>>n;
 	char b[n];
 	cout<<"Enter string 2 : ";
 	cin>>b;
+	b[n] = '\0';
 
 	if(check(a,b,m,n))
 		cout<<"Yes\n";
