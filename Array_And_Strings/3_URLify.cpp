@@ -46,7 +46,7 @@ int main()
 	char s[n+1];
 	cout<<"Enter the string : ";
 	cin.getline(s, sizeof(s));
-	s[n+1] = '\0';
+	s[n] = '\0';
 	
 	urlify(s,n);
 	cout<<"Result : "<<str<<endl;
