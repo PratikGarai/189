@@ -23,17 +23,31 @@ char* process(char* a, int l)
 		else
 		{
 			b[curr_ind++] = curr_char;
-			b[curr_ind++] = '0'+curr_count;
+			int digs = (int)log(curr_count);
+			for(int j=0;j<digs;j++)
+			{
+				int r = curr_count%10;
+				b[curr_ind+digs-j-1] = '0'+r;
+				curr_count = curr_count/10;
+			}
 			curr_char = a[i];
 			curr_count = 1;
-			new_length += 2;
+			new_length += digs;
+			curr_ind += digs;
 		}
 	}
 
 	b[curr_ind++] = curr_char;
-	b[curr_ind++] = '0'+curr_count;
+	int digs = (int)log(curr_count);
+	for(int j=0;j<digs;j++)
+	{
+		int r = curr_count%10;
+		b[curr_ind+digs-j-1] = '0'+r;
+		curr_count = curr_count/10;
+	}
+	new_length += digs;
+	curr_ind += digs;
 	b[curr_ind]  = '\0';
-	new_length += 2;
 
 	if(new_length<l)
 		return b;
