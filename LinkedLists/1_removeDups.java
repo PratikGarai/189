@@ -1,11 +1,35 @@
 // Remove duplicate elements from an unsorted linked list
 
 import java.util.Scanner;
+import java.util.HashSet;
 
 class RemoveDups
 {
 	void removeDupsWithBuffer(Node head)
 	{
+		if(head==null)
+			return ;
+
+		Node prev = head;
+		Node curr = head.next;
+		HashSet<Integer> a = new HashSet<Integer>();
+		a.add(head.data);
+		while(curr!=null)
+		{
+			if(a.contains(curr.data))
+			{
+				prev.next = curr.next;
+				curr = curr.next;
+			}
+			else
+			{
+				a.add(curr.data);
+				prev = prev.next;
+				if(prev==null)
+					break;
+				curr = curr.next;
+			}
+		}
 	}
 
 	void removeDupsWithoutBuffer(Node head)
@@ -47,9 +71,10 @@ class RemoveDups
 			System.out.print(curr.data+"  ");
 			curr = curr.next;
 		}
-
-		System.out.print("The new list is : ");
-		Node curr = head;
+	
+		ob.removeDupsWithBuffer(head);
+		System.out.print("\nThe new list is : ");
+		curr = head;
 		while(curr!=null)
 		{
 			System.out.print(curr.data+"  ");
