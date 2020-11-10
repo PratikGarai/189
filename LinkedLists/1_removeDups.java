@@ -34,6 +34,32 @@ class RemoveDups
 
 	void removeDupsWithoutBuffer(Node head)
 	{
+		if(head==null)
+			return ;
+
+		Node base = head;
+
+		while(base.next!=null)
+		{
+			Node prev = base;
+			Node curr = base.next;
+			while(curr!=null)
+			{
+				if(curr.data==base.data)
+				{
+					prev.next = curr.next;
+					curr = curr.next;
+				}
+				else
+				{
+					prev = prev.next;
+					curr = curr.next;
+				}
+			}
+			base = base.next;
+			if(base==null)
+				break;
+		}
 	}
 
 	public static void main(String[] args)
@@ -72,7 +98,8 @@ class RemoveDups
 			curr = curr.next;
 		}
 	
-		ob.removeDupsWithBuffer(head);
+		// ob.removeDupsWithBuffer(head);
+		ob.removeDupsWithoutBuffer(head);
 		System.out.print("\nThe new list is : ");
 		curr = head;
 		while(curr!=null)
