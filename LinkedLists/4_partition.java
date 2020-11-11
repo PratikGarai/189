@@ -54,6 +54,40 @@ class Partition
 	{
 		if(head==null || head.next==null)
 			return;
+		Node tail = head;
+		while(tail.next!=null)
+			tail = tail.next;
+		
+		Node base_tail = tail;
+		Node curr = head;
+		Node prev = null;
+		while(curr!=base_tail.next)
+		{
+			if(curr.data<partition)
+			{
+				prev = curr;
+				curr = curr.next;
+			}
+			else
+			{
+				if(prev!=null)
+				{
+					prev.next = curr.next;
+					tail.next = curr;
+					curr.next = null;
+					tail = tail.next;
+					curr = prev.next;
+				}
+				else
+				{
+					curr = curr.next;
+					tail.next = head;
+					tail.next.next = null;
+					tail = tail.next;
+					head = curr;
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args)
@@ -95,9 +129,11 @@ class Partition
 
 		// method 1
 		// curr = ob.method1(head, partition);
+		//
 		// method 2
 		ob.method2(head, partition);
 		curr = head;
+
 		System.out.print("\nThe processed list is : ");
 		while(curr!=null)
 		{
