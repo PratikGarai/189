@@ -1,7 +1,7 @@
 // partition a linked list so that all elements less than a given number occur before the ones greater than or equal to it
 // 2 approaches are there :
 // 	1. create a new list
-// 	2. use the same list by shifting greater and equal elements to tail
+// 	2. use the same list by shifting lesser elements to head
 
 import java.util.Scanner;
 
@@ -50,44 +50,29 @@ class Partition
 		return head1;
 	}
 
-	void method2(Node head, int partition)
+	Node method2(Node head, int partition)
 	{
 		if(head==null || head.next==null)
-			return;
-		Node tail = head;
-		while(tail.next!=null)
-			tail = tail.next;
+			return head;
 		
-		Node base_tail = tail;
-		Node curr = head;
-		Node prev = null;
-		while(curr!=base_tail.next)
+		Node prev = head;
+		Node curr  = head.next;
+		while(curr!=null)
 		{
 			if(curr.data<partition)
+			{
+				prev.next = curr.next;
+				curr.next = head;
+				head = curr;
+				curr = prev.next;
+			}
+			else
 			{
 				prev = curr;
 				curr = curr.next;
 			}
-			else
-			{
-				if(prev!=null)
-				{
-					prev.next = curr.next;
-					tail.next = curr;
-					curr.next = null;
-					tail = tail.next;
-					curr = prev.next;
-				}
-				else
-				{
-					curr = curr.next;
-					tail.next = head;
-					tail.next.next = null;
-					tail = tail.next;
-					head = curr;
-				}
-			}
 		}
+		return head;
 	}
 
 	public static void main(String[] args)
@@ -131,8 +116,7 @@ class Partition
 		// curr = ob.method1(head, partition);
 		//
 		// method 2
-		ob.method2(head, partition);
-		curr = head;
+		curr = ob.method2(head, partition);
 
 		System.out.print("\nThe processed list is : ");
 		while(curr!=null)
