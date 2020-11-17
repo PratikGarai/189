@@ -78,7 +78,7 @@ class FixedModel
 			return -1;
 		if(pos[stack_number-1][2]==pos[stack_number-1][0]-1)
 			return -1;
-		return data[pos[stack_number-1][2]--]; 
+		return data[pos[stack_number-1][2]]; 
 	}
 
 	int pop(int stack_number)
@@ -95,5 +95,42 @@ class FixedModel
 		for(int s : data)
 			System.out.print(s+" ");
 		System.out.println();
+	}
+}
+
+class DynamicModel
+{
+	int length;
+	int[] data;
+	int[][] pos;
+	DynamicModel(int n)
+	{
+		length = n;
+		data = new int[n];
+		pos = new int[3][3];
+	}
+
+	boolean push(int stack_number, int d)
+	{
+	}
+
+	int peek(int stack_number)
+	{
+	}
+
+	int pop(int stack_number)
+	{
+	}
+
+	void delElementAtIndex(int index)
+	{
+	}
+
+	void insElementAtIndex(int index)
+	{
+	}
+
+	void printData()
+	{
 	}
 }
