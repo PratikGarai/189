@@ -12,7 +12,7 @@ class RotateMatrix {
 		int[][] new_matrix = new int[n][n];
 
 		for(int i=0; i<n/2; i++) {
-			for(int j=i; j<n-i; j++) {
+			for(int j=i; j<n-i-1; j++) {
 				new_matrix[i][j] = matrix[n-j-1][i];
 				new_matrix[n-j-1][i] = matrix[n-i-1][n-j-1];
 				new_matrix[n-i-1][n-j-1] = matrix[j][n-i-1];
@@ -30,6 +30,16 @@ class RotateMatrix {
 
 	public void rotateMatrixInplace(int[][] matrix) 
 	{
+		int n = matrix.length;
+		for(int i=0; i<n/2; i++) {
+			for(int j=i; j<n-i-1; j++) {
+				int temp = matrix[i][j];
+				matrix[i][j] = matrix[n-j-1][i];
+				matrix[n-j-1][i] = matrix[n-i-1][n-j-1];
+				matrix[n-i-1][n-j-1] = matrix[j][n-i-1];
+				matrix[j][n-i-1] = temp;
+			}
+		}
 	}
 
 	public void printMatrix(int[][] matrix) 
@@ -67,6 +77,11 @@ class RotateMatrix {
 		int [][] new_matrix = ob.rotateMatrix(m);
 		System.out.println("New matrix : ");
 		ob.printMatrix(new_matrix);
+		System.out.println("\n---------------------\n");
+
+		ob.rotateMatrixInplace(m);
+		System.out.println("Matrix after inplace transform : ");
+		ob.printMatrix(m);
 		System.out.println("\n---------------------\n");
 	}
 }
