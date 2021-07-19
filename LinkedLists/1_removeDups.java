@@ -26,7 +26,7 @@ class RemoveDuplicates {
 		}
 	}
 
-	public void printList(int n) {
+	public void printList() {
 		if(head==null) {
 			System.out.println("List is empty");
 			return;
@@ -34,10 +34,33 @@ class RemoveDuplicates {
 
 		Node current = head;
 		while(current!=null) 
+		{
 			System.out.print(current.data+" -> ");
+			current = current.next;
+		}
 		System.out.println("end");
 	}
 
+	public void removeDupicatesWithBuffer() {
+		if(head==null)
+			return;
+
+		HashSet<Integer> h = new HashSet<Integer>();
+		h.add(head.data);
+		Node prev = head;
+		Node curr = head.next;
+
+		while(curr!=null) {
+			if(h.contains(curr.data)) {
+				prev.next = curr.next;
+				curr = curr.next;
+			} else {
+				h.add(curr.data);
+				prev = prev.next;
+				curr = curr.next;
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -46,6 +69,9 @@ class RemoveDuplicates {
 
 		RemoveDuplicates ob = new RemoveDuplicates();
 		ob.acceptData(n);
+		ob.printList();
+		ob.removeDupicatesWithBuffer();
+		ob.printList();
 	}
 }
 
