@@ -61,6 +61,33 @@ class RemoveDuplicates {
 			}
 		}
 	}
+
+	public void removeDupicatesWithoutBuffer() {
+		if(head==null)
+			return;
+
+		Node base = head;
+		Node prev = head;
+		Node curr = head.next;
+
+		while(base.next!=null) {
+			while(curr!=null) {
+				if(curr.data==base.data) {
+					prev.next = curr.next;
+					curr = curr.next;
+				} else {
+					prev = prev.next;
+					curr = curr.next;
+				}
+			}
+
+			prev = base.next;
+			base = base.next;
+			if(base==null)
+				break;
+			curr = base.next;
+		}
+	}
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -70,7 +97,8 @@ class RemoveDuplicates {
 		RemoveDuplicates ob = new RemoveDuplicates();
 		ob.acceptData(n);
 		ob.printList();
-		ob.removeDupicatesWithBuffer();
+		// ob.removeDupicatesWithBuffer();
+		ob.removeDupicatesWithoutBuffer();
 		ob.printList();
 	}
 }
