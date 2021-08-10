@@ -1,8 +1,8 @@
-// Delete the middle node of linked list
+// Question here
 
 import java.util.Scanner;
 
-class DeleteMiddleNode {
+class Template {
 
 	Node head;
 	Node last;
@@ -40,43 +40,13 @@ class DeleteMiddleNode {
 		System.out.println("end");
 	}
 
-	public void deleteMiddle() {
-		Node slow = head;
-		Node fast = head;
-		Node prev = null;
-
-		if(slow==null)
-			return;
-
-		while(fast!=null && fast.next!=null) {
-			if(prev==null)
-				prev = head;
-			else 
-				prev = prev.next;
-			slow = slow.next;
-			fast = fast.next.next;
-		}
-
-		if(slow.next==null) {
-			if(prev==null)
-				head = null;
-			else 
-				prev.next = null;
-			return;
-		}
-
-		prev.next = slow.next;
-	}
-
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter the number of elements : ");
 		int n = in.nextInt();
 
-		DeleteMiddleNode ob = new DeleteMiddleNode();
+		Template ob = new Template();
 		ob.acceptData(n);
-		ob.printList();
-		ob.deleteMiddle();
 		ob.printList();
 	}
 }
