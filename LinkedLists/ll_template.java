@@ -40,6 +40,22 @@ class Template {
 		System.out.println("end");
 	}
 
+	public void printList(Node head) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return;
+		}
+
+		Node current = head;
+		while(current!=null) 
+		{
+			System.out.print(current.data+" -> ");
+			current = current.next;
+		}
+		System.out.println("end");
+	}
+
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter the number of elements : ");
@@ -48,6 +64,7 @@ class Template {
 		Template ob = new Template();
 		ob.acceptData(n);
 		ob.printList();
+		ob.printList(ob.head);
 	}
 }
 
