@@ -1,4 +1,4 @@
-// Question here
+// Linked list elements represent digits from back to front, add them
 
 import java.util.Scanner;
 
