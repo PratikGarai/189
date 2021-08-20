@@ -1,26 +1,57 @@
 // Stack and Queue Template
 
-class Stck<T>
+import java.util.Scanner;
+
+public class sq_template {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+
+		Stack<Integer> stack = new Stack<Integer>(5);
+		stack.push(10);
+		stack.push(20);
+		stack.push(30);
+		stack.printStack();
+		System.out.println("Popping : " + stack.pop());
+		stack.printStack();
+
+		Queue<String> queue = new Queue<String>(5);
+		queue.enqueue("Abc");
+		queue.enqueue("Def");
+		queue.enqueue("Ghi");
+		queue.printQueue();
+		System.out.println("Dequeuing : " + queue.dequeue());
+		queue.printQueue();
+	}
+}
+
+class Stack<T>
 {
 	int capacity, top;
 	T[] buffer;
 
-	Stck(int capacity) {
+	Stack(int capacity) {
 		this.capacity = capacity;
-		@SuppressWarnings("unchecked")
 		buffer = (T[]) new Object[capacity];
 		top = -1;
 	}
 
+	boolean isEmpty() {
+		return top==-1; 
+	}
+
+	boolean isFull() {
+		return top==capacity-1;
+	}
+
 	T peek() {
-		if(top==-1)
+		if(isEmpty())
 			return null;
 		else 
 			return buffer[top];
 	}
 
 	T pop() {
-		if(top==-1) {
+		if(isEmpty()) {
 			System.out.println("Empty stack, underflow");
 			return null;
 		} else {
@@ -29,7 +60,7 @@ class Stck<T>
 	}
 
 	boolean push(T data) {
-		if(top==capacity-1) {
+		if(isFull()) {
 			System.out.println("Full stack, overflow");
 			return false;
 		} else {
@@ -37,24 +68,39 @@ class Stck<T>
 			return true;
 		}
 	}
+
+	void printStack() {
+		System.out.print("Bottom -> ");
+		for(int i=0; i<=top; i++) {
+			System.out.print(buffer[i]+" -> ");
+		}
+		System.out.println("Top");
+	}
 }
 
 
-class Q<T> 
+class Queue<T> 
 {
 	int capacity, head, rear;
 	T[] buffer;
 	
-	Q(int capacity) {
+	Queue(int capacity) {
 		this.capacity = capacity;
-		@SuppressWarnings("unchecked")
 		buffer = (T[]) new Object[capacity];
 		rear = -1;
 		head = 0;
 	}
 
+	boolean isEmpty() {
+		return rear==head-1;
+	}
+
+	boolean isFull() {
+		return head==capacity;
+	}
+
 	T peek() {
-		if(rear==-1||rear==head-1) {
+		if(isEmpty()) {
 			System.out.println("Empty queue, underflow");
 			return null;
 		} else {
@@ -62,8 +108,8 @@ class Q<T>
 		}
 	}
 
-	T pop() {
-		if(rear==-1||rear==head-1) {
+	T dequeue() {
+		if(isEmpty()) {
 			System.out.println("Empty queue, underflow");
 			return null;
 		} else {
@@ -71,13 +117,21 @@ class Q<T>
 		}
 	}
 
-	boolean push(T data) {
-		if(head==capacity) {
+	boolean enqueue(T data) {
+		if(isFull()) {
 			System.out.println("Queue full, underflow");
 			return false;
 		} else {
 			buffer[head++] = data;
 			return true;
 		}
+	}
+
+	void printQueue() {
+		System.out.print("Rear -> ");
+		for(int i=rear+1; i<head; i++) {
+			System.out.print(buffer[i]+" -> ");
+		}
+		System.out.println("Front");
 	}
 }
